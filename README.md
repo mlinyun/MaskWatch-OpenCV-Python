@@ -57,7 +57,7 @@ pip install opencv-contrib-python
 3. 运行以下命令启动程序：
 
 ```bash
-python main.py
+python image_process_pipeline.py
 ```
 
 ## 注意事项
