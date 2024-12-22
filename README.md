@@ -44,10 +44,10 @@
 
 ### 安装依赖
 
-确保已安装Python和OpenCV库。如未安装，请运行以下命令：
+在 requirements.txt 文件中列出了项目所需的所有依赖库，可以使用以下命令安装：
 
 ```bash
-pip install opencv-contrib-python
+pip install -r requirements.txt
 ```
 
 ### 运行程序
@@ -57,8 +57,54 @@ pip install opencv-contrib-python
 3. 运行以下命令启动程序：
 
 ```bash
-python 01_image_process_pipeline.py
+python mask_monitoring_system.py
 ```
+
+### 打包程序
+
+1. 在项目目录下，创建一个名为 `venv` 的虚拟环境：
+
+    ```bash
+    virtualenv venv
+    ```
+
+2. 继续执行下面的命令，激活该虚拟环境：
+
+    ```bash
+    venv\Scripts\activate
+    ```
+
+3. 将 `mask_monitoring_system.py` 和 `images/mask_monitor.ico` 文件移动 `venv` 文件夹内
+
+4. 完成移动后，需要进入到 `venv` 文件夹内：
+
+    ```bash
+    cd venv
+    ```
+
+5. 然后执行打包命令：
+
+    ```bash
+    pyinstaller.exe -F -w -i mask_monitor.ico mask_monitoring_system.py
+    ```
+
+   其中 `mask_monitor.ico` 是图标文件名，`mask_monitoring_system.py` 是 python 文件名
+
+6. 打包完成后，在`venv`文件夹内可以看到一个`dist`文件夹：
+
+   ![图片描述](./docs/Snipaste_2024-12-22_16-26-27.png)
+
+   生成的`exe`文件就在其中，如图所示。除此之外其余的文件则尽可删除了
+
+7. 这时候的 `exe` 文件还不能直接执行，因为还有一个必要的环节不能够忽略：那就是级联识别器文件，将
+   `cascade_classifier\haarcascade_eye_tree_eyeglasses.xml`（包含文件夹）放在同 `mask_monitoring_system.exe`
+   同一目录下（这两个文件必须放一块儿，否则会影响到程序的正常运行）
+
+   ![图片描述](./docs/Snipaste_2024-12-22_16-33-05.png)
+
+## 说明
+
+本项目中编号为 01 至 13 的 Python 文件为学习用途，删除这些文件不影响项目正常运行。
 
 ## 注意事项
 
