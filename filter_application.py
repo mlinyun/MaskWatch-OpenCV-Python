@@ -2,7 +2,6 @@
 import os
 
 import cv2
-import numpy as np
 
 # 确保保存路径的文件夹存在
 os.makedirs("./images/output_05", exist_ok=True)
