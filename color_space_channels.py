@@ -1,6 +1,5 @@
 # 导包
 import cv2
-import numpy as np
 
 """
 BGR 色彩空间
