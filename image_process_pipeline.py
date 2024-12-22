@@ -1,18 +1,23 @@
 # 导包
+import os
+
 import cv2
 import numpy as np
+
+# 确保保存路径的文件夹存在
+os.makedirs("./images/output_01", exist_ok=True)
 
 # 读取 image1 并打印其像素组
 image1 = cv2.imread("./images/img1.jpg")
 print(image1)
 
-# 取出image1的shape属性，并打印查看
+# 取出 image1 的 shape 属性，并打印查看
 image1_shape = image1.shape
 print(image1_shape)
 
 """
 需求一：需要对图像进行简单的处理并保存：将图像的右边的
-一半变为绿色，然后在原目录下保存为文件img1_1.jpg 。
+一半变为绿色，然后在原目录下保存为文件 img1_1.jpg 。
 """
 # 将 image1 复制给 image2，然后对 image2 进行修改。以达到保留变量 image1 的目的
 image2 = image1.copy()
@@ -21,7 +26,7 @@ half_width = image2.shape[1] // 2
 # 将图像的右半边变为绿色
 image2[:, half_width:, :] = [0, 255, 0]
 # 保存图像
-cv2.imwrite("./images/img1_1.jpg", image2)
+cv2.imwrite("./images/output_01/img1_1.jpg", image2)
 
 """
 需求二：通过 OpenCV 的像素数组，创建出左上，右上，右下，左下
@@ -47,7 +52,7 @@ image3[region_height:, region_width:] = [0, 0, 255]
 # 右下角区域为白色
 image3[region_height:, :region_width] = [255, 255, 255]
 # 保存图像
-cv2.imwrite("./images/four_color.jpg", image3)
+cv2.imwrite("./images/output_01/four_color.jpg", image3)
 
 # 显示图像，窗口标题为 img1，图像为 image1，按任意键退出
 cv2.imshow("img1", image1)

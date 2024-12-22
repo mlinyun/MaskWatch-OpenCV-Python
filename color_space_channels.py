@@ -1,5 +1,10 @@
 # 导包
+import os
+
 import cv2
+
+# 确保保存路径的文件夹存在
+os.makedirs("./images/output_02", exist_ok=True)
 
 """
 BGR 色彩空间
@@ -40,7 +45,7 @@ bgra_image1[100:200, 200:300, 3] = 0
 # 将 bgra_image1 的第 [250, 350] 行，第[200, 300]列的像素的透明度设置为 172
 bgra_image1[250:350, 200:300, 3] = 172
 # 保存 BGRA 图像为 jpg 文件 "bgra_image1.png"
-cv2.imwrite("./images/bgra_image1.png", bgra_image1)
+cv2.imwrite("./images/output_02/bgra_image1.png", bgra_image1)
 
 """
 GRAY 色彩空间
@@ -55,7 +60,7 @@ gray_image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
 # 打印转 GRAY 色彩通道后的像素数组
 print(gray_image1)
 # 保存 GRAY 图像为 jpg 文件 "gray_image1.png"
-cv2.imwrite("./images/gray_image1.png", gray_image1)
+cv2.imwrite("./images/output_02/gray_image1.png", gray_image1)
 
 """
 HSV 色彩空间
@@ -71,7 +76,7 @@ H 分别调为 0，30，60 后，转回 BGR 色彩空间，再依次保存为 im
 # 转到 HSV 色彩空间 转换码为 cv2.COLOR_BGR2HSV
 image1_hsv = cv2.cvtColor(image1, cv2.COLOR_BGR2HSV)
 # 保存 HSV 图像为 jpg 文件 "image1_hsv.jpg"
-cv2.imwrite("./images/image1_hsv.jpg", image1_hsv)
+cv2.imwrite("./images/output_02/image1_hsv.jpg", image1_hsv)
 
 # 将 image1_hsv 的 H 通道设置为 0
 image1_h0 = image1_hsv.copy()
@@ -79,7 +84,7 @@ image1_h0[:, :, 0] = 0
 # 将 H 通道设置为 0 后的图像转回 BGR 色彩空间
 image1_h0_bgr = cv2.cvtColor(image1_h0, cv2.COLOR_HSV2BGR)
 # 保存 BGR 图像为 jpg 文件 "image1_h0.jpg"
-cv2.imwrite("./images/image1_h0.jpg", image1_h0_bgr)
+cv2.imwrite("./images/output_02/image1_h0.jpg", image1_h0_bgr)
 
 # 将 image1_hsv 的 H 通道设置为 30
 image1_h30 = image1_hsv.copy()
@@ -87,7 +92,7 @@ image1_h30[:, :, 0] = 30
 # 将 H 通道设置为 30 后的图像转回 BGR 色彩空间
 image1_h30_bgr = cv2.cvtColor(image1_h30, cv2.COLOR_HSV2BGR)
 # 保存 BGR 图像为 jpg 文件 "image1_h30.jpg"
-cv2.imwrite("./images/image1_h30.jpg", image1_h30_bgr)
+cv2.imwrite("./images/output_02/image1_h30.jpg", image1_h30_bgr)
 
 # 将 image1_hsv 的 H 通道设置为 60
 image1_h60 = image1_hsv.copy()
@@ -95,4 +100,4 @@ image1_h60[:, :, 0] = 60
 # 将 H 通道设置为 60 后的图像转回 BGR 色彩空间
 image1_h60_bgr = cv2.cvtColor(image1_h60, cv2.COLOR_HSV2BGR)
 # 保存 BGR 图像为 jpg 文件 "image1_h60.jpg"
-cv2.imwrite("./images/image1_h60.jpg", image1_h60_bgr)
+cv2.imwrite("./images/output_02/image1_h60.jpg", image1_h60_bgr)

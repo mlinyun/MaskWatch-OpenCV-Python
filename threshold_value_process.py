@@ -1,4 +1,9 @@
+import os
+
 import cv2
+
+# 确保保存路径的文件夹存在
+os.makedirs("./images/output_03", exist_ok=True)
 
 """
 二值化处理与反二值化处理
@@ -16,13 +21,13 @@ ret1, thresh = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 print("二值化处理的阈值：", ret1)
 # 保存二值化处理后的图像
 # 使用下面的方式保存图像，可以避免中文乱码问题
-cv2.imencode('.jpg', thresh)[1].tofile("./images/img2二值化处理.jpg")
+cv2.imencode('.jpg', thresh)[1].tofile("./images/output_03/img2二值化处理.jpg")
 
 # 反二值化处理，阈值为 127。其中返回的 ret2 是阈值，thresh_inv 是处理后的图像
 ret2, thresh_inv = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
 print("反二值化处理的阈值：", ret2)
 # 保存反二值化处理后的图像
-cv2.imencode('.jpg', thresh_inv)[1].tofile("./images/img2反二值化处理.jpg")
+cv2.imencode('.jpg', thresh_inv)[1].tofile("./images/output_03/img2反二值化处理.jpg")
 
 """
 截断处理
@@ -33,7 +38,7 @@ cv2.imencode('.jpg', thresh_inv)[1].tofile("./images/img2反二值化处理.jpg"
 ret3, thresh_trunc = cv2.threshold(img, 127, 255, cv2.THRESH_TRUNC)
 print("截断处理的阈值：", ret3)
 # 保存截断处理后的图像为 "img2截断处理.jpg"
-cv2.imencode('.jpg', thresh_trunc)[1].tofile("./images/img2截断处理.jpg")
+cv2.imencode('.jpg', thresh_trunc)[1].tofile("./images/output_03/img2截断处理.jpg")
 
 """
 零处理
@@ -45,12 +50,12 @@ cv2.imencode('.jpg', thresh_trunc)[1].tofile("./images/img2截断处理.jpg")
 # 做低阈值零处理 并保存为 "img2低阈值零处理.jpg"
 ret4, thresh_tozero = cv2.threshold(img, 127, 255, cv2.THRESH_TOZERO)
 print("低阈值零处理的阈值：", ret4)
-cv2.imencode('.jpg', thresh_tozero)[1].tofile("./images/img2低阈值零处理.jpg")
+cv2.imencode('.jpg', thresh_tozero)[1].tofile("./images/output_03/img2低阈值零处理.jpg")
 
 # 做高阈值零处理 并保存为 "img2高阈值零处理.jpg"
 ret5, thresh_tozero_inv = cv2.threshold(img, 127, 255, cv2.THRESH_TOZERO_INV)
 print("高阈值零处理的阈值：", ret5)
-cv2.imencode('.jpg', thresh_tozero_inv)[1].tofile("./images/img2高阈值零处理.jpg")
+cv2.imencode('.jpg', thresh_tozero_inv)[1].tofile("./images/output_03/img2高阈值零处理.jpg")
 
 """
 自适应阈值处理
@@ -69,11 +74,11 @@ cv2.imencode('.jpg', thresh_tozero_inv)[1].tofile("./images/img2高阈值零处�
 # 使用平均法
 thresh_mean = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 3)
 # 保存自适应处理的结果为 "img2均值法自适应处理.jpg"
-cv2.imencode('.jpg', thresh_mean)[1].tofile("./images/img2均值法自适应处理.jpg.jpg")
+cv2.imencode('.jpg', thresh_mean)[1].tofile("./images/output_03/img2均值法自适应处理.jpg.jpg")
 # 使用高斯法
 thresh_gaussian = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 3)
 # 保存自适应处理的结果为 "img2高斯法自适应处理.jpg"
-cv2.imencode('.jpg', thresh_gaussian)[1].tofile("./images/img2高斯法自适应处理.jpg")
+cv2.imencode('.jpg', thresh_gaussian)[1].tofile("./images/output_03/img2高斯法自适应处理.jpg")
 
 """
 OTSU 方法
@@ -85,7 +90,7 @@ OTSU 方法是一种自动确定阈值的方法，该方法是一种全局阈值
 ret6, thresh_otsu = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 print("OTSU 方法的阈值：", ret6)
 # 保存 OTSU 方法处理的结果为 "img2_OTSU的二值化处理.jpg"
-cv2.imencode('.jpg', thresh_otsu)[1].tofile("./images/img2_OTSU的二值化处理.jpg")
+cv2.imencode('.jpg', thresh_otsu)[1].tofile("./images/output_03/img2_OTSU的二值化处理.jpg")
 
 """
 以图像在 HSV 色彩空间中的色调（H值）的阈值为准，进行阈值处理，得到肤色图
@@ -99,4 +104,4 @@ H, S, V = cv2.split(img_hsv)
 # 将 H 值大于 [3, 12] 的部分变为 255 其余的变为 0。
 img_skin = cv2.inRange(H, 3, 12)
 # 保存文件为 "img3_skin.jpg"
-cv2.imwrite("./images/img3_skin.jpg", img_skin)
+cv2.imwrite("./images/output_03/img3_skin.jpg", img_skin)
